@@ -27,7 +27,15 @@ class DCATHarvester(HarvesterBase):
 
     _user_name = None
 
+    def _set_config(self, config_str):
+        if config_str:
+            self.config = json.loads(config_str)
+            if 'api_version' in self.config:
+                self.api_version = int(self.config['api_version'])
 
+            log.debug('Using config: %r', self.config)
+        else:
+            self.config = {}
 
 
     def _get_content_and_type(self, url, harvest_job, page=1, content_type=None):
@@ -412,6 +420,15 @@ class DCATHarvester(HarvesterBase):
                 log.info('Dataset with ID '+harvest_object.guid+' and resource'+dropped+' not created, resources already exists')
             else:
                 self.append_provenance_data(package_dict,harvest_object,"initial_harvest", excluded_resources)#Adding provenance data to dataset
+
+                # Add default tags from configuration field:
+                self._set_config(harvest_object.job.source.config)
+                default_tags = self.config.get('default_tags', [])
+                if default_tags:
+                    if not 'tags' in package_dict:
+                        package_dict['tags'] = []
+                    package_dict['tags'].extend(
+                        [t for t in default_tags if t not in package_dict['tags']])
 
                 package_schema = logic.schema.default_create_package_schema()
                 context['schema'] = package_schema
