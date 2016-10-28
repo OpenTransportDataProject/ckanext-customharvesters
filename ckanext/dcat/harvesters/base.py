@@ -452,6 +452,14 @@ class DCATHarvester(HarvesterBase):
         elif status == 'change':
 
             try:
+                # Add default tags from configuration field:
+                self._set_config(harvest_object.job.source.config)
+                default_tags = self.config.get('default_tags', [])
+                if default_tags:
+                    if not 'tags' in package_dict:
+                        package_dict['tags'] = []
+                    package_dict['tags'].extend(
+                        [t for t in default_tags if t not in package_dict['tags']])
 
                 #This part adds old provenance data to the new package_dict
                 provenance_data=""
