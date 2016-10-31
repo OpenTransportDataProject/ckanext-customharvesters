@@ -22,6 +22,7 @@ This extension is a modification of the already existing extension that can be f
 
 3.  Install the extension requirements:
 
+        (pyenv) $ cd /usr/lib/ckan/default/src/
         (pyenv) $ pip install -r ckanext-customharvesters/requirements.txt
 
 4.  Enable the required plugins in your ini file:
