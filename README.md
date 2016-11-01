@@ -1,12 +1,10 @@
 # ckanext-customharvesters
 
-
 This extension is a modification of the already existing extension that can be found here [https://github.com/ckan/ckanext-dcat](https://github.com/ckan/ckanext-dcat). The extension provides functionality for logging data about harvest activity done on each dataset, and functionality that checks if the dataset already exists based on its resources. It alse extends the original extension by adding two custom harvesters which are adapted for harvesting data from [http://data.norge.no](http://data.norge.no)and [http://geonorge.no](http://geonorge.no).
 
 
 ## Contents
 
-- [Overview](#overview)
 - [Installation](#installation)
 - [How to harvest data](#how-to-harvest-data)
 
@@ -14,7 +12,7 @@ This extension is a modification of the already existing extension that can be f
 
 ## Installation
 
-1.  Install ckanext-harvest ([https://github.com/ckan/ckanext-harvest#installation](https://github.com/ckan/ckanext-harvest#installation)) (Only if you want to use the RDF harvester)
+1.  Install ckanext-harvest ([https://github.com/ckan/ckanext-harvest#installation](https://github.com/ckan/ckanext-harvest#installation)) 
 
 2.  Install the extension on your virtualenv:
 
@@ -35,26 +33,41 @@ This extension is a modification of the already existing extension that can be f
 
 ## How to harvest data
 
-First you need to create a harvest source which is using one of the harvesters from this extension. This can be done at http://yourIP/harvest. 
+1.  Navigate to the harvester interface by going to http://yourCKANIP/harvest
 
-After the harvest source is created, you need to create a harvest job. This is done by clicking at the created harvest source, and then choosing "reharvest"
+2.  Press the ”Add Harvest Source” button and fill in the necessary information about your harvest source.  
+    -If you want to add a general tag to all datasets(for example ”OTD”), add the following line in the configurationfield:
+        
+        "default_tags": [{"name": "OTD"}]
+      
+    -Example URL for data.norge.no: [http://data.norge.no/api/dcat/data.json](http://data.norge.no/api/dcat/data.json)
+    
+    -Example URL for geonorge.no: [https://kartkatalog.geonorge.no/api/search?text=kystverket&limit=10000000](https://kartkatalog.geonorge.no/api/search?text=kystverket&limit=10000000)
+    
+    
+    Remember to hit save when you are done
 
-When a harvest job is started by a user in the Web UI, or by a scheduled
-harvest, the harvest is started by the ``harvester run`` command. This is the
-normal method in production systems and scales well.
+3.  Choose the harvest source you created from the list found at http://yourCKANIP/harvest
 
-In this case, the harvesting extension uses two different queues: one that
-handles the gathering and another one that handles the fetching and importing.
-To start the consumers run the following command (make sure you have your
-python environment activated)::
+4.  Press the ”Admin”-button.  (you must be logged in as a sysadmin user)
 
-      (pyenv) $ paster --plugin=ckanext-harvest harvester gather_consumer --config=/etc/ckan/default/production.ini
+5.  Press  the  ”Reharvest”-button,  you have  now  created  a new  harvest  job.
 
-On another terminal, run the following command::
+6.  Login to your CKAN server through SSH.(How to do this depends on your own setup)
 
-      (pyenv) $ paster --plugin=ckanext-harvest harvester fetch_consumer --config=/etc/ckan/default/production.ini
+7.  Activate your CKAN virtual environment(How to do this may vary, depending on your CKAN installation):
 
-Finally, on a third console, run the following command to start any
-pending harvesting jobs::
+        /usr/lib/ckan/default/bin/activate
 
-      (pyenv) $ paster --plugin=ckanext-harvest harvester run --config=/etc/ckan/default/production.ini
+  
+8.  Run the gather_consumer-command:
+
+        (pyenv) $ paster --plugin=ckanext-harvest harvester gather_consumer --config=/etc/ckan/default/production.ini
+
+9.  On another terminal, run the fetch_consumer-command:
+
+        (pyenv) $ paster --plugin=ckanext-harvest harvester fetch_consumer --config=/etc/ckan/default/production.ini
+
+10. Finally, on a third console, run the run-command to start any pending harvesting jobs:
+
+        (pyenv) $ paster --plugin=ckanext-harvest harvester run --config=/etc/ckan/default/production.ini
