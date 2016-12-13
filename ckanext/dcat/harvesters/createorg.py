@@ -43,20 +43,23 @@ def create_org(dataset_dict):
 # check if organization exists in the catalogue
 def check_org_exist(org_name):
         found = False
-        org_url='http://127.0.0.1:5000/api/3/action/organization_list'
-        orglist=urllib.urlopen(org_url).read()
-        doc = json.loads(orglist)
-        datasets = doc["result"]
-        print datasets
-        for dataset in datasets:
-            print dataset
-            if dataset == org_name:
+        for org in org_list:
+            print org
+            if org == org_name:
                print "Found the organization : " + org_name
                found = True
                break
 
 	return found
 
+
+# get the list of organizations from the catalogue
+org_url='http://127.0.0.1:5000/api/3/action/organization_list'
+orglist=urllib.urlopen(org_url).read()
+doc = json.loads(orglist)
+org_list = doc["result"]
+print 'The list of organizations: '
+print org_list
 
 with open('orgfile.txt') as f:
      content = f.read().decode('utf8').splitlines()
