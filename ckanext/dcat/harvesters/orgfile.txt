@@ -1,0 +1,51 @@
+org_name:akershus-fylkeskommune
+url:
+display_name:Akershus fylkeskommune
+org_name:avinor-as
+url:http://orglogo.difi.no/api/logo/100/985198292
+display_name:Avinor AS
+org_name:direktoratet-for-forvaltning-og-ikt
+url:http://orglogo.difi.no/api/logo/100/991825827
+display_name:Direktoratet for forvaltning og IKT
+org_name:enova-sf
+url:http://orglogo.difi.no/api/logo/100/983609155
+display_name:Enova SF
+org_name:jernbaneverket
+url:http://orglogo.difi.no/api/logo/100/971033533
+display_name:Jernbaneverket
+org_name:kolumbus-as
+url:
+display_name:Kolumbus AS
+org_name:kommunal-og-moderniseringsdepartementet
+url:
+display_name:Kommunal- og moderniseringsdepartementet
+org_name:kystverket
+url:http://orglogo.difi.no/api/logo/100/874783242
+display_name:KYSTVERKET
+org_name:norsk-reiseinformasjon-as
+url:
+display_name:Norsk Reiseinformasjon AS
+org_name:porsgrunn-kommune
+url:http://orglogo.difi.no/api/logo/100/939991034
+display_name:Porsgrunn kommune
+org_name:posten-norge-as
+url:http://orglogo.difi.no/api/logo/100/984661185
+display_name:Posten Norge AS
+org_name:ruter-as
+url:
+display_name:Ruter AS
+org_name:sintef
+url:
+display_name:SINTEF
+org_name:sorum-kommune
+url:http://orglogo.difi.no/api/logo/100/942645295
+display_name:Sørum kommune
+org_name:statens-vegvesen
+url:http://orglogo.difi.no/api/logo/100/971032081
+display_name:Statens vegvesen
+org_name:statistisk-sentralbyra
+url:
+display_name:Statistisk sentralbyrå
+org_name:stavanger-kommune
+url:
+display_name:Stavanger kommune
