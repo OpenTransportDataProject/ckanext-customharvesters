@@ -1,5 +1,5 @@
 # Description: update organizations of harvested datasets from data.norge.no to their original published organization instead of harvester organization
-# Author: Shanshan Jiang, last modified 13.12.2016
+# Author: Shanshan Jiang, last modified 14.12.2016
 
 import json
 import urllib
@@ -8,12 +8,6 @@ import pprint
 
 print "update organizations for a dataset"
 url='http://127.0.0.1:5000/api/3/action/package_list'
-#url='http://78.91.98.234:5000/api/3/action/organization_list'
-#content=urllib.urlopen(url).read()
-
-#orgfile = open('orgfile.txt', 'w')
-
-
 
 def get_datasets(url):
     content=urllib.urlopen(url).read()
@@ -23,7 +17,6 @@ def get_datasets(url):
     print datasets
     for dataset in datasets:
         print dataset
-        #orgfile.write('org_name:' + str(dataset) + '\n')
         showorgurl='http://127.0.0.1:5000/api/3/action/package_show?id=' + dataset
         dataset_dict = get_package_org(showorgurl)
         print '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
@@ -38,7 +31,6 @@ def get_package_org(url):
     org_name = dataset_dict.get('organization').get('title')
     print "organization: " + org_name
     extras = dataset_dict.get('extras')
-    #print extras
     if extras is not None:
     	for item in extras:
 	    if item.get('key') == 'dcat_publisher_name':
@@ -85,11 +77,9 @@ def update_dataset(dataset_dict):
     # replace with the correct url of CKAN server
     request = urllib2.Request(
     'http://127.0.0.1:5000/api/action/package_update')
-    # 'http://78.91.98.234:5000/api/action/organization_update')
 
     # replace with the correct APIkey
-    request.add_header('Authorization', '765e099f-6d07-48a8-82ba-5a79730a976f')  #for local
-    #request.add_header('Authorization', '93f9960d-daff-4d67-adb8-e75f24189c44')    #for sintef server
+    request.add_header('Authorization', '765e099f-6d07-48a8-82ba-5a79730a976f')  
 
     # Make the HTTP request.
     response = urllib2.urlopen(request, data_string)
@@ -105,5 +95,5 @@ def update_dataset(dataset_dict):
  
 
 get_datasets(url)
-#orgfile.close()
+
 
