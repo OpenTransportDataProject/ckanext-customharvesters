@@ -1,5 +1,5 @@
 # Description: create harvested organizations from orgfile.txt
-# Author: Shanshan Jiang, last modified 13.12.2016
+# Author: Shanshan Jiang, last modified 14.12.2016
 
 import json
 import urllib
@@ -22,11 +22,9 @@ def create_org(dataset_dict):
     # replace with the correct url of CKAN server
     request = urllib2.Request(
     'http://127.0.0.1:5000/api/action/organization_create')
-    # 'http://78.91.98.234:5000/api/action/organization_create')
 
     # replace with the correct APIkey
-    request.add_header('Authorization', '765e099f-6d07-48a8-82ba-5a79730a976f')  #for local
-    #request.add_header('Authorization', '93f9960d-daff-4d67-adb8-e75f24189c44')    #for sintef server
+    request.add_header('Authorization', '765e099f-6d07-48a8-82ba-5a79730a976f') 
 
     # Make the HTTP request.
     response = urllib2.urlopen(request, data_string)
@@ -85,9 +83,5 @@ for line in content:
           print 'The organization ' + org_name + ' already exists!'
        else:
           create_org(org_dict)
-
-#create_org(org_dict)
-
-
 
 f.close()
